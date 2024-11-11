@@ -50,7 +50,7 @@ myImage.onclick = () => {
     if (mySrc === "images/firefox-icon.png") {
         // Change image and heading
         myImage.setAttribute("src", "images/luffy-flag.png");
-        myHeading.textContent = "Luffy is Cool!";
+        myHeading.textContent = "Luffy is Cool";
         
         // Change link
         if (link.getAttribute('href') === "https://www.mozilla.org/en-US/about/manifesto/") {
@@ -76,7 +76,7 @@ myImage.onclick = () => {
     } else {
         // Change image and heading
         myImage.setAttribute("src", "images/firefox-icon.png");
-        myHeading.textContent = "Mozilla is Cool!";
+        myHeading.textContent = "Mozilla is Cool";
         
         // Change link
         link.setAttribute('href', "https://www.mozilla.org/en-US/about/manifesto/");
@@ -99,3 +99,36 @@ myImage.onclick = () => {
 };
 
 
+// --------------------------------------------------------- //
+
+// Heading Customization
+
+// Storing the button and h1 as variables
+let myButton = document.querySelector("button");
+let newHeading = document.querySelector("h1");
+
+// Creating a function to ask for the name, store the name using localStorage, then add the name to the heading
+function setUserName() {
+    const myName = prompt("Please enter your name.");
+    // Check if user entered blank name
+    if (!myName) {
+        setUserName ();
+    } else { // run the rest of the function to add name in heading
+        localStorage.setItem("name", myName);
+        newHeading.textContent += `, ${myName}`;
+    }
+    
+}
+
+// Check if the name is stored, runs the function if not. Retrieves the name if it is stored
+if (!localStorage.getItem("name")) {
+  setUserName();
+} else {
+  const storedName = localStorage.getItem("name");
+  myHeading.textContent += `, ${storedName}`;
+}
+
+// Add event listener
+myButton.onclick = () => {
+    setUserName();
+}
